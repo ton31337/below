@@ -36,6 +36,7 @@ use crate::cgroup_tabs::default_tabs::CGROUP_CPU_TAB;
 use crate::cgroup_tabs::default_tabs::CGROUP_GENERAL_TAB;
 use crate::cgroup_tabs::default_tabs::CGROUP_IO_TAB;
 use crate::cgroup_tabs::default_tabs::CGROUP_MEM_TAB;
+use crate::cgroup_tabs::default_tabs::CGROUP_PIDS_TAB;
 use crate::cgroup_tabs::default_tabs::CGROUP_PRESSURE_TAB;
 use crate::cgroup_tabs::default_tabs::CGROUP_PROPERTIES_TAB;
 use crate::cgroup_tabs::CgroupTab;
@@ -147,6 +148,7 @@ impl StateCommon for CgroupState {
         let mut sort_tags = HashMap::new();
         sort_tags.insert("General".into(), &*CGROUP_GENERAL_TAB);
         sort_tags.insert("CPU".into(), &*CGROUP_CPU_TAB);
+        sort_tags.insert("Pids".into(), &*CGROUP_PIDS_TAB);
         sort_tags.insert("Mem".into(), &*CGROUP_MEM_TAB);
         sort_tags.insert("I/O".into(), &*CGROUP_IO_TAB);
         sort_tags.insert("Pressure".into(), &*CGROUP_PRESSURE_TAB);
@@ -248,6 +250,7 @@ impl CgroupView {
         let tabs = vec![
             "General".into(),
             "CPU".into(),
+            "Pids".into(),
             "Mem".into(),
             "I/O".into(),
             "Pressure".into(),
@@ -264,6 +267,12 @@ impl CgroupView {
             "CPU".into(),
             CgroupView {
                 tab: &*CGROUP_CPU_TAB,
+            },
+        );
+        tabs_map.insert(
+            "Pids".into(),
+            CgroupView {
+                tab: &*CGROUP_PIDS_TAB,
             },
         );
         tabs_map.insert(

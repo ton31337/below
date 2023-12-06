@@ -295,6 +295,7 @@ pub mod default_tabs {
     use model::CgroupPropertiesFieldId::CpuWeight;
     use model::CgroupPropertiesFieldId::CpusetCpus;
     use model::CgroupPropertiesFieldId::CpusetCpusEffective;
+    use model::CgroupPropertiesFieldId::PidsMax;
     use model::CgroupPropertiesFieldId::MemoryHigh;
     use model::CgroupPropertiesFieldId::MemoryLow;
     use model::CgroupPropertiesFieldId::MemoryMax;
@@ -309,7 +310,9 @@ pub mod default_tabs {
     use model::SingleCgroupModelFieldId::Mem;
     use model::SingleCgroupModelFieldId::Name;
     use model::SingleCgroupModelFieldId::Pressure;
+    use model::SingleCgroupModelFieldId::Pids;
     use model::SingleCgroupModelFieldId::Props;
+    use model::CgroupPidsModelFieldId::PidsCurrent;
     use once_cell::sync::Lazy;
 
     use super::*;
@@ -344,6 +347,12 @@ pub mod default_tabs {
             ViewItem::from_default(Cpu(NrPeriodsPerSec)),
             ViewItem::from_default(Cpu(NrThrottledPerSec)),
             ViewItem::from_default(Cpu(ThrottledPct)),
+        ])
+    });
+
+    pub static CGROUP_PIDS_TAB: Lazy<CgroupTab> = Lazy::new(|| {
+        CgroupTab::new(vec![
+            ViewItem::from_default(Pids(PidsCurrent)),
         ])
     });
 
@@ -437,6 +446,7 @@ pub mod default_tabs {
             ViewItem::from_default(Props(CpuWeight)),
             ViewItem::from_default(Props(CpusetCpus)),
             ViewItem::from_default(Props(CpusetCpusEffective)),
+            ViewItem::from_default(Props(PidsMax)),
             ViewItem::from_default(Props(CgroupControllers)),
         ])
     });
